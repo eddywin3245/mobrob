@@ -1,0 +1,15 @@
+teleop_twist_joy_node:
+  ros__parameters:
+    # Left stick for driving
+    axis_linear:
+      x: 1        # left stick up/down
+    axis_angular:
+      yaw: 0      # left stick left/right
+
+    # Hold circle button as dead-man switch for manual mode
+    enable_button: 1   # circle button
+
+    scale_linear:
+      x: 0.5      # max 0.5 m/s forward
+    scale_angular:
+      yaw: 1.0    # max 1.0 rad/s turning

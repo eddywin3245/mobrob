@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/eddywin32/.claude/projects/-home-eddywin32-ros2-ws-src-p3at_robot/**)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
+    ],
+    "additionalDirectories": [
+      "/home/eddywin32/.claude/projects/-home-eddywin32-ros2-ws-src-p3at_robot/memory"
+    ]
+  }
+}

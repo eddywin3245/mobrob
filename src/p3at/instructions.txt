@@ -1,0 +1,48 @@
+to launch wsl 
+
+wsl -d Ubuntu-24.04
+
+to launch gazebo 
+
+gz sim $(ros2 pkg prefix p3at)/share/p3at/worlds/basic_urdf.sdf'
+
+to spawn robot 
+
+gz service -s /world/pioneer_world/create \
+  --reqtype gz.msgs.EntityFactory \
+  --reptype gz.msgs.Boolean \
+  --timeout 1000 \
+  --req 'sdf_filename: "/home/eddywin32/ros2_ws/src/p3at/robots/pioneer.urdf", name: "urdf_model"'
+
+  to get gazebo talking with ros2
+
+  ros2 run ros_gz_bridge parameter_bridge \
+  /scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan \
+  /imu@sensor_msgs/msg/Imu[gz.msgs.IMU \
+  /cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist \
+  /camera/image@sensor_msgs/msg/Image[gz.msgs.Image
+
+  to get robot state publisher 
+
+  ros2 run robot_state_publisher robot_state_publisher \
+  --ros-args -p robot_description:="$(cat ~/ros2_ws/src/p3at/robots/pioneer.urdf)"
+
+  to get rviz 
+
+  rviz2
+
+to see rqt graph
+
+ros2 run rqt_graph rqt_graph
+
+
+to rebuild launch package
+cd ~/ros2_ws && colcon build --packages-select p3at
+
+  launch command for all of it 
+
+  ros2 launch p3at sdf.launch.py
+
+  run waypoint controller 
+
+  ros2 run p3at waypoint_controller.py

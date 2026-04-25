@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>p3at_robot</name>
+  <version>0.0.0</version>
+  <description>Pioneer 3-AT real robot package (Part 2)</description>
+  <maintainer email="eddywin32@todo.todo">eddywin32</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,18 @@
+# ROS2 build artifacts
+build/
+install/
+log/
+
+# Generated frame files
+*.gv
+*.pdf
+
+# Third-party drivers (clone separately)
+src/Lakibeam_ROS2_Driver/
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor
+.vscode/

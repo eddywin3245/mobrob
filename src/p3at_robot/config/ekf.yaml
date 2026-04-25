@@ -1,0 +1,46 @@
+ekf_node:
+  ros__parameters:
+    frequency: 30.0
+    sensor_timeout: 0.1
+    two_d_mode: true
+    print_diagnostics: false
+    publish_tf: true        # ekf_node owns the odom->base_link TF
+
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom       # MUST stay as odom (SLAM handles map<-odom transform)
+
+    # Wheel encoder odometry
+    odom0: /odom
+    odom0_config: [true,  true,  false,   # x, y, z
+                   false, false, true,    # roll, pitch, yaw
+                   true,  false, false,   # vx, vy, vz
+                   false, false, true,    # vroll, vpitch, vyaw
+                   false, false, false]   # ax, ay, az
+    odom0_differential: false
+    odom0_relative: false
+    odom0_queue_size: 5
+
+    # Phidget Spatial 3/3/3 — real gyro + accelerometer
+    imu0: /imu/data_raw
+    imu0_config: [false, false, false,   # x, y, z
+                  false, false, false,   # roll, pitch, yaw (let odom handle this)
+                  false, false, false,   # vx, vy, vz
+                  false, false, true,    # vroll, vpitch, vyaw (real gyro z)
+                  true,  false, false]   # ax, ay, az (forward accel helps with wheel slip)
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
+
+    # GPS for global position correction (filters out odometry drift)
+    pose0: /fix
+    pose0_config: [true,  true,  false,   # x, y, z (use GPS lat/lon converted to map frame)
+                   false, false, false,   # roll, pitch, yaw
+                   false, false, false,   # vx, vy, vz
+                   false, false, false,   # vroll, vpitch, vyaw
+                   false, false, false]   # ax, ay, az
+    pose0_differential: false
+    pose0_relative: false
+    pose0_queue_size: 5
+
