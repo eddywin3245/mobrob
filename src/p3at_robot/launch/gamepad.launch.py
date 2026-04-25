@@ -257,8 +257,8 @@ def generate_launch_description():
         waypoint_follower,
         nav2_lifecycle,
         phidget_imu,
-        gps_node,
-        gps_navigator,
+        # gps_node,       # not used in Part 3 (indoor/confined area, LIDAR SLAM used instead)
+        # gps_navigator,  # not used in Part 3
         oak_camera,
         object_detector,
         camera_rgb_tf,

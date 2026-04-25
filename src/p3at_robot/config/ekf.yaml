@@ -33,14 +33,4 @@ ekf_node:
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
 
-    # GPS for global position correction (filters out odometry drift)
-    pose0: /fix
-    pose0_config: [true,  true,  false,   # x, y, z (use GPS lat/lon converted to map frame)
-                   false, false, false,   # roll, pitch, yaw
-                   false, false, false,   # vx, vy, vz
-                   false, false, false,   # vroll, vpitch, vyaw
-                   false, false, false]   # ax, ay, az
-    pose0_differential: false
-    pose0_relative: false
-    pose0_queue_size: 5
 
