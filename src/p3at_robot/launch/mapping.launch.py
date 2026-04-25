@@ -46,13 +46,30 @@ def generate_launch_description():
         arguments=['0.2', '0', '0.3', '0', '0', '0', 'base_link', 'laser']
     )
 
-    # Robot base — publishes /odom and odom->base_link TF
+    # Robot base — publishes /odom (raw wheel encoders)
     aria_node = Node(
         package='p3at_robot',
         executable='ariaNode',
         name='aria_node',
         arguments=['-rp', '/dev/ttyUSB0'],
         output='screen'
+    )
+
+    # IMU — provides gyro for heading accuracy during turns
+    phidget_imu = Node(
+        package='p3at_robot',
+        executable='phidget_imu.py',
+        name='phidget_imu',
+        output='log'
+    )
+
+    # EKF — fuses wheel odom + IMU, owns the odom->base_link TF that SLAM reads
+    ekf_node = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_node',
+        output='screen',
+        parameters=[os.path.join(pkg, 'config', 'ekf.yaml')]
     )
 
     # Gamepad — so you can drive around while mapping
@@ -109,6 +126,8 @@ def generate_launch_description():
         lidar,
         laser_tf,
         aria_node,
+        phidget_imu,
+        ekf_node,
         joy_node,
         gamepad_controller,
         slam,
