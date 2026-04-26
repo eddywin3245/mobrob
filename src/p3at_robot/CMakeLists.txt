@@ -20,6 +20,7 @@ install(PROGRAMS
   src/nav2_waypoints.py
   src/phidget_imu.py
   src/oak_camera.py
+  src/imu_calibrate.py
   src/cone_detection.py
   src/object_detector.py
   src/waypoint_scanner.py

@@ -39,7 +39,7 @@ RUN git clone https://github.com/RichbeamTechnology/Lakibeam_ROS2_Driver.git /la
 RUN echo "source /lakibeam_ws/install/setup.bash" >> /root/.bashrc
 
 # Install DepthAI (OAK camera SDK) and Phidget22
-RUN pip3 install --break-system-packages depthai Phidget22
+RUN pip3 install --break-system-packages depthai Phidget22 matplotlib
 
 # Build AriaCoda (library to talk to the Pioneer robot)
 RUN git clone https://github.com/reedhedges/AriaCoda.git /AriaCoda \

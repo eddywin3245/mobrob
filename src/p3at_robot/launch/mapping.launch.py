@@ -63,6 +63,36 @@ def generate_launch_description():
         output='log'
     )
 
+    # OAK-D camera — publishes RGB, depth PointCloud2, and IMU
+    oak_camera = Node(
+        package='p3at_robot',
+        executable='oak_camera.py',
+        name='oak_camera',
+        output='log'
+    )
+
+    # Camera TF publishers (x=0.15m forward, z=0.1m up, no rotation)
+    camera_rgb_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='camera_rgb_tf',
+        arguments=['0.15', '0', '0.1', '0', '0', '0', 'base_link', 'camera_rgb_optical_frame']
+    )
+
+    camera_depth_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='camera_depth_tf',
+        arguments=['0.15', '0', '0.1', '0', '0', '0', 'base_link', 'camera_depth_optical_frame']
+    )
+
+    camera_imu_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='camera_imu_tf',
+        arguments=['0.15', '0', '0.1', '0', '0', '0', 'base_link', 'camera_imu_frame']
+    )
+
     # EKF — fuses wheel odom + IMU, owns the odom->base_link TF that SLAM reads
     ekf_node = Node(
         package='robot_localization',
@@ -127,6 +157,10 @@ def generate_launch_description():
         laser_tf,
         aria_node,
         phidget_imu,
+        oak_camera,
+        camera_rgb_tf,
+        camera_depth_tf,
+        camera_imu_tf,
         ekf_node,
         joy_node,
         gamepad_controller,

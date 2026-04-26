@@ -21,7 +21,7 @@ ekf_node:
     odom0_relative: false
     odom0_queue_size: 5
 
-    # Phidget Spatial 3/3/3 — real gyro + accelerometer
+    # Phidget Spatial 3/3/3 — real gyro + accelerometer (calibrated)
     imu0: /imu/data_raw
     imu0_config: [false, false, false,   # x, y, z
                   false, false, false,   # roll, pitch, yaw (let odom handle this)
@@ -33,4 +33,14 @@ ekf_node:
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
 
-
+    # OAK-D BNO085 — second gyro + accel for redundancy (calibrated)
+    imu1: /camera/imu
+    imu1_config: [false, false, false,   # x, y, z
+                  false, false, false,   # roll, pitch, yaw
+                  false, false, false,   # vx, vy, vz
+                  false, false, true,    # vroll, vpitch, vyaw (gyro z)
+                  true,  false, false]   # ax, ay, az
+    imu1_differential: false
+    imu1_relative: false
+    imu1_queue_size: 10
+    imu1_remove_gravitational_acceleration: true
